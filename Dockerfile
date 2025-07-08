@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21 AS build-stage
+FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS build-stage
 
 # build time arguements
 ARG CXXFLAGS="\
@@ -56,7 +56,7 @@ RUN \
   make -j2 && \
   make DESTDIR=/build/quassel install
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
 # set version label
 ARG BUILD_DATE
