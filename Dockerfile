@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS build-stage
+FROM alpine:3.22 AS build-stage
 
 # build time arguements
 ARG CXXFLAGS="\
@@ -16,6 +16,7 @@ RUN \
     boost-dev \
     build-base \
     cmake \
+    curl \
     dbus-dev \
     icu-dev \
     openssl-dev \
@@ -56,7 +57,7 @@ RUN \
   make -j2 && \
   make DESTDIR=/build/quassel install
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM alpine:3.22
 
 # set version label
 ARG BUILD_DATE
@@ -90,3 +91,4 @@ COPY root/ /
 # ports and volumes
 VOLUME /config
 EXPOSE 4242 10113
+CMD quasselcore --configdir /config ${RUN_OPTS}
