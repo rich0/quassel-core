@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine:3.22 AS build-stage
+FROM alpine:3.23 AS build-stage
 
 # build time arguements
 ARG CXXFLAGS="\
@@ -57,7 +57,7 @@ RUN \
   make -j2 && \
   make DESTDIR=/build/quassel install
 
-FROM alpine:3.22
+FROM alpine:3.23
 
 # set version label
 ARG BUILD_DATE
