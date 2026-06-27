@@ -10,11 +10,9 @@ LABEL org.opencontainers.image.title="quassel-core" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.source="https://github.com/rich0/quassel-core"
 
-RUN apk add --no-cache \
+RUN apk add --no-cache --no-scripts \
       quassel-core=${QUASSEL_APK_VERSION} \
       openssl \
-    && deluser quassel \
-    && delgroup quassel \
     && addgroup -g 1000 quassel \
     && adduser -D -u 1000 -G quassel -h /config quassel
 
