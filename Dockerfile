@@ -13,6 +13,8 @@ LABEL org.opencontainers.image.title="quassel-core" \
 RUN apk add --no-cache \
       quassel-core=${QUASSEL_APK_VERSION} \
       openssl \
+    && deluser quassel \
+    && delgroup quassel \
     && addgroup -g 1000 quassel \
     && adduser -D -u 1000 -G quassel -h /config quassel
 
