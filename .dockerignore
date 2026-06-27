@@ -1,6 +1,6 @@
 .git
 .gitignore
-.github
 .gitattributes
-READMETEMPLATE.md
 README.md
+LICENSE
+build-push.sh
