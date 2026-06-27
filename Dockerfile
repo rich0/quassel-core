@@ -16,8 +16,7 @@ RUN apk add --no-cache --no-scripts \
     && addgroup -g 1000 quassel \
     && adduser -D -u 1000 -G quassel -h /config quassel
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY --chown=quassel:quassel --chmod=755 entrypoint.sh /entrypoint.sh
 
 ENV HOME=/config
 
@@ -26,5 +25,5 @@ USER 1000:1000
 VOLUME /config
 EXPOSE 4242 10113
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]
 CMD []
