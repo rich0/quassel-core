@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-VERSION=0.15.0
+VERSION=0.14.0
 QUASSEL_APK_VERSION=0.14.0-r17
 IMAGE=registry.rich0.org/public/quassel-core
 
