@@ -14,6 +14,23 @@ Quassel is a distributed IRC client: this image runs only the **core** — the a
 
 The image is intentionally minimal: Alpine 3.24, the distro `quassel-core` package (0.14.0), a small entrypoint script, and nothing else.
 
+## Image
+
+- Registry: `registry.rich0.org/public/quassel-core` (Zot, public anonymous pull)
+- Base: Alpine 3.24
+- Ports: `4242/tcp` (client), `10113/tcp` (ident, optional)
+- Config: `/config`
+
+### Pull
+
+```bash
+docker pull registry.rich0.org/public/quassel-core:latest
+# or pin a version
+docker pull registry.rich0.org/public/quassel-core:0.15.0
+```
+
+Public pulls do not require login.
+
 ## How it works
 
 1. Container starts as user `quassel` (UID/GID **1000**).
@@ -30,7 +47,7 @@ docker run -d \
   --name quassel-core \
   -p 4242:4242 \
   -v ./config:/config \
-  ghcr.io/rich0/quassel-core:latest
+  registry.rich0.org/public/quassel-core:latest
 ```
 
 Ensure the host directory (or PVC) is writable by UID 1000:
@@ -56,7 +73,7 @@ docker run -d \
   -p 4242:4242 \
   -p 10113:10113 \
   -v ./config:/config \
-  ghcr.io/rich0/quassel-core:latest
+  registry.rich0.org/public/quassel-core:latest
 ```
 
 ### Ports
@@ -79,16 +96,19 @@ Built for non-root deployment (`runAsUser`/`fsGroup` 1000). When migrating from 
 ## Build and publish
 
 ```bash
+docker login registry.rich0.org -u ci-push -p '<password>'
 ./build-push.sh
 ```
 
 Or build locally:
 
 ```bash
-docker build -t ghcr.io/rich0/quassel-core:latest .
+docker build -t registry.rich0.org/public/quassel-core:latest .
 ```
 
-Published tags: `ghcr.io/rich0/quassel-core:0.15.0`, `:latest`.
+Pins `VERSION` / `QUASSEL_APK_VERSION` and publishes to `registry.rich0.org/public/quassel-core` (`:<version>` and `:latest`).
+
+Published tags: `registry.rich0.org/public/quassel-core:0.15.0`, `:latest`.
 
 ## License
 
