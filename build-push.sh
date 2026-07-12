@@ -7,6 +7,7 @@ IMAGE=registry.rich0.org/public/quassel-core
 
 docker build . \
   --pull \
+  --no-cache \
   --build-arg VERSION=0.14.0 \
   --build-arg QUASSEL_APK_VERSION="${QUASSEL_APK_VERSION}" \
   --tag "${IMAGE}:${VERSION}" \
