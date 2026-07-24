@@ -5,6 +5,7 @@ VERSION=0.14.0
 QUASSEL_APK_VERSION=0.14.0-r17
 IMAGE=registry.rich0.org/public/quassel-core
 
+regctl image copy  "${IMAGE}:latest" "${IMAGE}:previous"
 docker build . \
   --pull \
   --no-cache \
